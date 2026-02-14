@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pour Mon Amour</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --wine: #8B1538;
+            --rose-gold: #E6B8A2;
+            --cream: #FFF8F3;
+            --deep-burgundy: #4A0E1F;
+            --soft-pink: #F4E4E0;
+            --gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--deep-burgundy);
+            background: var(--cream);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--wine) 0%, var(--deep-burgundy) 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(230, 184, 162, 0.1) 0%, transparent 50%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2rem;
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 400;
+            color: var(--cream);
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--rose-gold);
+            letter-spacing: 0.08em;
+            margin-bottom: 2rem;
+        }
+
+        .hero-tagline {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(0.9rem, 2vw, 1.1rem);
+            font-weight: 300;
+            color: var(--soft-pink);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+            letter-spacing: 0.05em;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--rose-gold);
+            font-size: 0.9rem;
+            letter-spacing: 0.15em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 8rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 500;
+            color: var(--wine);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .section-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            font-style: italic;
+            color: var(--rose-gold);
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 300;
+        }
+
+        /* Our Story Section */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .story-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(139, 21, 56, 0.1);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(139, 21, 56, 0.2);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, var(--soft-pink) 0%, var(--rose-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--wine);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .image-placeholder::before {
+            content: '♥';
+            position: absolute;
+            font-size: 9rem;
+            opacity: 0.1;
+            animation: heartbeat 2s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .story-card-content {
+            padding: 2rem;
+        }
+
+        .story-card-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--wine);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .story-card-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--deep-burgundy);
+            font-weight: 300;
+        }
+
+        /* Love Letter Section */
+        .love-letter {
+            background: var(--wine);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .love-letter::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(230, 184, 162, 0.1) 0%, transparent 70%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-50px, 50px) rotate(180deg); }
+        }
+
+        .letter-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(230, 184, 162, 0.2);
+            border-radius: 12px;
+            padding: 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .letter-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: var(--cream);
+            text-align: center;
+            margin-bottom: 2rem;
+            letter-spacing: 0.08em;
+        }
+
+        .letter-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            line-height: 2;
+            color: var(--soft-pink);
+            font-style: italic;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .letter-signature {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--rose-gold);
+            text-align: right;
+            margin-top: 3rem;
+            font-weight: 300;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            background: var(--soft-pink);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1/1;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .gallery-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--rose-gold) 0%, var(--wine) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-style: italic;
+            color: white;
+            overflow: hidden;
+        }
+
+        .gallery-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* Promise Section */
+        .promises {
+            background: var(--cream);
+        }
+
+        .promises-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .promise-item {
+            display: flex;
+            gap: 2rem;
+            align-items: start;
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--wine);
+            box-shadow: 0 5px 20px rgba(139, 21, 56, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .promise-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 30px rgba(139, 21, 56, 0.15);
+        }
+
+        .promise-icon {
+            font-size: 3rem;
+            color: var(--wine);
+            flex-shrink: 0;
+        }
+
+        .promise-text {
+            flex: 1;
+        }
+
+        .promise-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--wine);
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .promise-description {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--deep-burgundy);
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--deep-burgundy);
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--rose-gold);
+            font-style: italic;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .footer-date {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            color: var(--soft-pink);
+            letter-spacing: 0.2em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .section {
+                padding: 5rem 1rem;
+            }
+
+            .letter-content {
+                padding: 2rem;
+            }
+
+            .promise-item {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+
+        /* Lightbox Styles - À ajouter */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--rose-gold);
+            border-radius: 50%;
+            color: var(--rose-gold);
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10000;
+        }
+
+        .lightbox-close:hover {
+            background: var(--rose-gold);
+            color: var(--deep-burgundy);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--rose-gold);
+            border-radius: 50%;
+            color: var(--rose-gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: var(--rose-gold);
+            color: var(--deep-burgundy);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* Clickable images cursor */
+        .image-placeholder img,
+        .gallery-placeholder img {
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Mon Amour</h1>
+            <p class="hero-subtitle">Une Histoire d'Amour Éternelle</p>
+            <p class="hero-tagline">
+                Chaque moment passé avec toi est une page précieuse dans le livre de notre amour.
+                Tu es la lumière qui illumine mes jours et la douceur qui berce mes nuits.
+            </p>
+        </div>
+        <div class="scroll-indicator">↓ DÉCOUVRE</div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="section">
+        <h2 class="section-title">Notre Histoire</h2>
+        <p class="section-subtitle">Les chapitres de notre voyage ensemble</p>
+
+        <div class="story-grid">
+            <div class="story-card">
+                <div class="image-placeholder">
+                    <img src="1.jpeg" alt="Notre première rencontre">
+                </div>
+                <div class="story-card-content">
+                    <h3 class="story-card-title">Notre Première Rencontre</h3>
+                    <p class="story-card-text">
+                        Le jour où nos regards se sont croisés, j'ai su que ma vie changerait à jamais.
+                        Tu es entrée dans mon monde comme une douce mélodie, et depuis, chaque instant résonne de ta présence.
+                    </p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="image-placeholder">
+                    <img src="2.jpeg" alt="Moments précieux">
+                </div>
+                <div class="story-card-content">
+                    <h3 class="story-card-title">Moments Précieux</h3>
+                    <p class="story-card-text">
+                        Chaque rire partagé, chaque regard complice, chaque main tenue...
+                        Ces instants sont les trésors de mon cœur, des souvenirs que je chérirai éternellement.
+                    </p>
+                </div>
+            </div>
+
+            <div class="story-card">
+                <div class="image-placeholder">
+                    <img src="3.jpeg" alt="Notre avenir">
+                </div>
+                <div class="story-card-content">
+                    <h3 class="story-card-title">Notre Avenir</h3>
+                    <p class="story-card-text">
+                        Avec toi, je vois un avenir rempli de promesses, de rêves partagés et d'amour infini.
+                        Ensemble, nous écrirons les plus belles pages de notre histoire.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Love Letter Section -->
+    <section class="section love-letter">
+        <div class="letter-content">
+            <h2 class="letter-title">À Toi, Ma Maïram</h2>
+            <p class="letter-text">
+                "Dans un monde en perpétuel mouvement, tu es mon ancre, ma paix, mon havre de douceur.
+                Tu as transformé mon existence en une symphonie d'émotions, où chaque note vibre d'amour et de tendresse.
+                Tes sourires sont mes victoires, tes rêves sont mes aspirations, ton bonheur est ma raison d'être."
+            </p>
+            <p class="letter-text">
+                "Je promets de chérir chaque jour à tes côtés, de célébrer tes joies comme les miennes,
+                de te soutenir dans tes épreuves, et de t'aimer sans condition, aujourd'hui et pour toujours."
+            </p>
+            <p class="letter-signature">Avec tout mon amour, Ma Vie</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="section gallery">
+        <h2 class="section-title">Nos Souvenirs</h2>
+        <p class="section-subtitle">Instants capturés, moments immortels</p>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <img src="4.jpeg" alt="Souvenir 1">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <img src="5.jpeg" alt="Souvenir 2">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <img src="6.jpeg" alt="Souvenir 3">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <img src="7.jpeg" alt="Souvenir 4">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <img src="8.jpeg" alt="Souvenir 5">
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div class="gallery-placeholder">
+                    <img src="9.jpeg" alt="Souvenir 6">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promises Section -->
+    <section class="section promises">
+        <h2 class="section-title">Mes Promesses</h2>
+        <p class="section-subtitle">Ce que je te promets pour toujours</p>
+
+        <div class="promises-container">
+            <div class="promise-item">
+                <div class="promise-icon">♥</div>
+                <div class="promise-text">
+                    <h3 class="promise-title">T'aimer Inconditionnellement</h3>
+                    <p class="promise-description">
+                        Dans la joie comme dans la peine, dans les rires comme dans les larmes,
+                        mon amour pour toi restera immuable, profond et sincère.
+                    </p>
+                </div>
+            </div>
+
+            <div class="promise-item">
+                <div class="promise-icon">✨</div>
+                <div class="promise-text">
+                    <h3 class="promise-title">Illuminer Tes Jours</h3>
+                    <p class="promise-description">
+                        Je ferai tout pour voir ton sourire chaque jour, pour être la raison de ta joie,
+                        et pour transformer chaque moment ordinaire en souvenir extraordinaire.
+                    </p>
+                </div>
+            </div>
+
+            <div class="promise-item">
+                <div class="promise-icon">🌙</div>
+                <div class="promise-text">
+                    <h3 class="promise-title">Être Ton Refuge</h3>
+                    <p class="promise-description">
+                        Dans mes bras, tu trouveras toujours la sécurité, le réconfort et la paix.
+                        Je serai ton port d'attache dans les tempêtes de la vie.
+                    </p>
+                </div>
+            </div>
+
+            <div class="promise-item">
+                <div class="promise-icon">∞</div>
+                <div class="promise-text">
+                    <h3 class="promise-title">Grandir Ensemble</h3>
+                    <p class="promise-description">
+                        Main dans la main, nous évoluerons, apprendrons et construirons notre avenir.
+                        Chaque défi sera une opportunité de renforcer notre lien.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p class="footer-text">Fid-Dunyaa Wal-Akhiraa</p>
+        <p class="footer-date">Je t'aime Néné Dieukeureum</p>
+    </footer>
+   <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightbox-close">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+        </div>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
+    </div>
+
+    <script>
+        // Lightbox functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('lightbox-close');
+        const prevBtn = document.getElementById('lightbox-prev');
+        const nextBtn = document.getElementById('lightbox-next');
+
+        // Get all images
+        const allImages = document.querySelectorAll('.image-placeholder img, .gallery-placeholder img');
+        let currentImageIndex = 0;
+        const imageArray = Array.from(allImages);
+
+        // Open lightbox
+        allImages.forEach((img, index) => {
+            img.addEventListener('click', () => {
+                currentImageIndex = index;
+                openLightbox(img.src);
+            });
+        });
+
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close lightbox
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Navigate images
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex - 1 + imageArray.length) % imageArray.length;
+            lightboxImg.src = imageArray[currentImageIndex].src;
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            currentImageIndex = (currentImageIndex + 1) % imageArray.length;
+            lightboxImg.src = imageArray[currentImageIndex].src;
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                prevBtn.click();
+            } else if (e.key === 'ArrowRight') {
+                nextBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
